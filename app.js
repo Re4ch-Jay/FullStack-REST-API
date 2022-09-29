@@ -1,9 +1,8 @@
 require('dotenv').config()
 
 const express = require("express");
-const { default: mongoose } = require("mongoose");
-const methodOverride = require('method-override')
 const app = express()
+const methodOverride = require('method-override');
 const PORT = 3000;
 
 // middleware
@@ -15,13 +14,12 @@ app.use(express.static('public'))
 // view engine
 app.set('view engine', 'ejs')
 
-// connect to db
-mongoose.connect(process.env.MOGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then((result) => app.listen(PORT, () => console.log('Connected to Database\nServer is running on port '+ PORT)))
-  .catch((err) => console.log(err));
+// connected to database
+const connectDB = require('./config/connectDB')
+connectDB()
+app.listen(PORT, () => console.log('Port', PORT))
 
 // routes
-app.get('/', (req, res) => {
-    res.redirect('/books')
-})
+app.get('/', (req, res) => res.redirect('/books'))
 app.use(require('./routes/bookRoutes'))
+app.use((req, res) => res.render('404'))
