@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %> 
+<body>
+    <%- include('./partials/nav.ejs') %> 
+    <div class="container">
+        <form class="action" action="/books" method="POST" style="max-width: 960px;
+        margin: 0 480px;">
+            <label class="form-label" for="title">Title</label>
+            <input class="form-control" type="text" id="title" name="title" required>
+            <label class="form-label" for="author">Author</label>
+            <input class="form-control" type="text" id="author" name="author" required>
+            <label class="form-label" for="rating">Rating</label>
+            <input class="form-control" type="number" id="rating" name="rating" min="1"  max="10" required>
+            <button class="btn btn-info my-3" type="submit">Add a new Book</button>
+        </form>
+    </div>
+    <div class="container text-success">
+        <h4>All Books</h4>
+    </div>
+    <div class="container">
+        <% if(books.length > 0) { %>
+            <% books.forEach(book => { %>
+                <a class="card p-3 my-3"  href="/books/<%= book.id %>">
+                    <h5 class="card-title text-success">Title: <%= book.title %> </h5>
+                    <p class="card-subtitle text-success">Author: <%= book.author %> </p>
+                    <p class="text-success">Rating: <%= book.rating %> </p>
+                    <form action="books/<%= book.id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-danger mt-3">Delete</button>
+                    </form>
+                </a>    
+                
+            <%}) %> 
+        <% }else { %>
+            <p>There is no book to read... Yay</p>
+        <% } %> 
+    </div>
+   
+    <%- include('./partials/footer.ejs') %> 
+   
+</body>
+</html>

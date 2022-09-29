@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %> 
+<body>
+    <%- include('./partials/nav.ejs') %> 
+
+    <div class="container my-3">
+        <form action="/books/<%= book.id %>?_method=PUT" method="POST" style="max-width: 960px;
+            margin: 0 480px;">
+            <label class="form-label" for="title">Title</label>
+            <input class="form-control" type="text" id="title" name="title" value="<%= book.title %>" required>
+            <label class="form-label" for="author">Author</label>
+            <input class="form-control" class="form-control" type="text" id="author" name="author" value="<%= book.author %>" required>
+            <label class="form-label" for="rating">Rating</label>
+            <input class="form-control" type="number" id="rating" name="rating" min="1" max="10" value="<%= book.rating %>" required>
+            <button class="btn btn-danger my-3" type="submit">Update</button>
+        </form>
+    </div>
+    <div class="container text-success pb-3">
+        <h4>Single Book</h4>
+    </div>
+    <div class="container">
+        <div class="card p-3 text-success">
+            <h3 class="card-title">Title: <%= book.title %> </h3>
+            <p class="card-subtitle">Author: <%= book.author %> </p>
+            <p>Rating: <%= book.rating %> </p>
+            <p>Posted: <%= book.createdAt.toLocaleString() %></p>
+            <form action="books/<%= book.id %>?_method=DELETE" method="POST">
+                <button class="btn btn-danger mt-3" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
+    
+    <%- include('./partials/footer.ejs') %> 
+   
+</body>
+</html>
