@@ -21,9 +21,9 @@
             <p class="card-subtitle">Author: <%= book.author %> </p>
             <p>Rating: <%= book.rating %> </p>
             <p>Posted: <%= book.createdAt.toLocaleString() %></p>
-            <form action="books/<%= book.id %>?_method=DELETE" method="POST">
+            <form action="<%= book.id %>?_method=DELETE" method="POST">
                 <button class="btn btn-danger mt-3" type="submit">Delete</button>
-            </form>
+            </form>    
         </div>
     </div>
     
